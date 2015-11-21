@@ -1,0 +1,99 @@
+ <!--
+      <ion-header-bar class="bar-royal">
+        <h1 class="title">Chennai Traffic Update</h1>
+      </ion-header-bar>
+      <ion-content class="padding home-content" scroll="false">
+       -->
+       
+        <!--
+        <div class="home-image-div">
+          <img class="home-image" src="img/map.png"/>
+        </div>
+        
+        <a class="button icon-left ion-model-s button-assertive menu-item menu-item-first my-button">
+          <span class="color-change">Traffic Status</span>
+        </a>
+        
+        <a class="button icon-left ion-social-facebook button-energized menu-item menu-item-item my-button">
+          <span class="color-change">Share Update</span>
+        </a>
+        
+                <a class="button icon-left ion-stats-bars button-balanced menu-item menu-item-item my-button">
+          <span class="color-change">Recent Statistics</span>
+        </a>
+        
+        -->
+        
+        
+        
+        
+        
+        
+        <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+        
+        <div id="map"></div>
+
+    <script>
+// This sample uses the Place Autocomplete widget to allow the user to search
+// for and select a place. The sample then displays an info window containing
+// the place ID and other information about the place that the user has
+// selected.
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 13.0827, lng: 80.2707},
+    zoom: 10,
+  });
+
+  var input = document.getElementById('pac-input');
+  var options = {
+  componentRestrictions: {country: "in"}
+ };
+
+  var autocomplete = new google.maps.places.Autocomplete(input,options);
+  autocomplete.bindTo('bounds', map);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      return;
+    }
+
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(15);
+    }
+
+    // Set the position of the marker using the place ID and location.
+    marker.setPlace({
+      placeId: place.place_id,
+      location: place.geometry.location
+    });
+    marker.setVisible(true);
+
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+        'Place ID: ' + place.place_id + '<br>' +
+        place.formatted_address);
+    infowindow.open(map, marker);
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
+        async defer></script>
+        
+      </ion-content>

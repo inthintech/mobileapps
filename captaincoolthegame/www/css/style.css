@@ -1,0 +1,25 @@
+/* Empty. Add your own CSS if you like */
+
+.img-background
+{
+	background-image: url('../img/bg.jpg');
+	background-size: cover;
+}
+.bg-color
+{
+	background: black;
+}
+.home-btn
+{
+	width: 45% !important;
+	margin-left: auto;
+	margin-right: auto;
+}
+.home-btn-top
+{
+	margin-top: 15% !important;
+}
+.home-btn-middle
+{
+	margin-top: 13% !important;
+}

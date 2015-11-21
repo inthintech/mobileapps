@@ -1,0 +1,48 @@
+    <ion-view ng-init="getLibrary()" cache-view="false">
+    <ion-pane>
+      <ion-header-bar class="bar-dark has-subheader" align-title="center">
+        
+        <h1 class="title">Movie Drive</h1>
+        
+              <div class="buttons">
+    <button ng-click="refreshView()" class="button button-clear ion-refresh"></button>
+  </div>
+                  
+             
+                                
+      </ion-header-bar>  
+      
+      <ion-content class="has-header">
+        
+      <ion-list>
+        
+  <ion-item class="item item-text-wrap item-button-right" ng-repeat="item in movieData | orderBy : moviesOrder : true | filter : queryRes">
+      <h2 class="padding-left">{{item.title}}</h2><p class="padding-left">{{item.release_year}}</p>
+      <p class="padding-left">Suggested By {{ item.count==1 ? item.count+' Person' : item.count+' People'}}</p>
+      
+      <div class="buttons">
+        <button class="button button-clear" ng-click="getMovieInfo({{item.id}})">
+          <i class="icon ion-information-circled"></i>
+        </button>
+        <button class="button button-clear" ng-click="viewersList({{item.id}})">
+          <i class="icon ion-social-facebook"></i>
+        </button>
+      </div>     
+      
+        <input type="hidden" value="{{item.timestamp}}"/>
+        <input type="hidden" value="{{item.count}}"/>
+        <input type="hidden" value="{{item.status}}"/>
+        <!--
+        <div>
+        <button class="button button-small button-assertive" ng-click="getMovieInfo({{item.id}})"
+                style="margin-top: 6%;margin-left: 4%;width:30%;">Movie Info</button>
+        </div>
+      -->
+      
+  </ion-item>
+  
+</ion-list>
+      </ion-content>
+        
+    </ion-pane>
+    </ion-view>

@@ -1,0 +1,72 @@
+/* Empty. Add your own CSS if you like */
+.scroll{
+	height: 100% !important;
+}
+.change-bg {
+	background-color: #FFE4C4 !important;
+}
+.game-header{
+	color: black !important;
+	font-size: 1.2em !important;
+	/*font-style: italic;*/
+}
+.result{
+	/*font-size: 1em !important;*/
+	position: absolute;
+	left:50px;
+}
+.timer{
+	color: red;
+	margin-left: 50%;
+	margin-top: 0%;
+}
+.test {
+	background-color: green !important;
+}
+.image-div-holder{
+	width:80%;height:25%;
+	/*background: blue;*/
+	margin-top: 0% !important;
+	margin-left: 10%;
+}
+.image-div-first{
+	width:45%;
+	height:100%;
+	/*background: green;*/
+	margin-left: 0%;
+	border:1px solid grey;
+}
+.image-div-first img{
+	width:100%;
+	height:100%;
+}
+.image-div-second{
+	width:45%;
+	height:100%;
+	/*background: yellow;*/
+	margin-left: 9%;
+	border:1px solid grey;
+}
+.image-div-second img{
+	width:100%;
+	height:100%;
+}
+.input-row{
+	margin-top: 5% !important;
+}
+.input-row-second{
+	margin-top: 3% !important;
+}
+.input-keys{
+	text-decoration: none;
+	padding:35%;
+	background: #6495ED;
+	color: #282828;
+	font-weight: bold;
+}
+.movie-name{
+	margin-top:5%;
+	text-align: center;
+	color:#8B4726;
+	font-weight: bold;
+}

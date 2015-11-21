@@ -1,0 +1,31 @@
+    <ion-view ng-init="init()" cache-view="false">
+    <ion-pane>
+      <ion-header-bar class="bar-dark" align-title="center">
+        <h1 class="title">Home</h1>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+      
+     <div class="list card">
+
+  <div class="item item-avatar">
+    <img ng-src="{{profileData.picture.data.url}}">
+    <h2>Welcome,</h2>
+    <p>{{profileData.name}}</p>
+  </div>
+</div>
+     
+    <div class="home-image">
+      <img ng-src="img/movie.jpg">
+    </div>
+    
+    <button ng-click="logout()" class="button icon-left ion-android-exit button-assertive log-out-button">Sign Out</button>
+        
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

@@ -1,0 +1,90 @@
+/* Empty. Add your own CSS if you like */
+.scroll
+{
+	height: 100% !important;
+}
+.home-image
+{
+	width: 70%;
+	height: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	/*border: 1px solid grey;*/
+	margin-top:20%; 
+}
+.home-image img
+{
+	width: 100%;
+	height: 100%;
+}
+.movie-image
+{
+	width: 60%;
+	height: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	/*border: 1px solid grey;*/
+	margin-top:10%;
+}
+.movie-image-img
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.movie-info-header
+{
+	color:grey;
+	font-style: italic;
+	margin-left:20%;
+	margin-top: 3%;
+}
+.movie-info-content
+{
+	margin-left:20%;
+	margin-top: 3%;
+}
+.movie-info-synopsis
+{
+	margin-left:20%;
+	margin-top: 3%;
+	width:70%;
+	padding-bottom: 30%;
+}
+.title
+{
+	font-size: 1.1em !important; 
+}
+.image-loader-container
+{
+	position: absolute;
+	top : 10px;
+	left : 10px;
+	max-width: 80px;
+	max-height: 80px;
+	width: 100%;
+	height: 100%;
+}
+.image-loader-container svg
+{
+	position: absolute;
+	top : 30px;
+	left : 30px;
+}
+.image-loader-container-info
+{
+	position: absolute;
+	width: 60%;
+	height: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	/*border: 1px solid grey;*/
+	top:0%;
+
+}
+.image-loader-container-info svg
+{
+	position: absolute;
+	top : 40%;
+	left : 40%;
+}

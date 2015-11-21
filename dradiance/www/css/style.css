@@ -1,0 +1,37 @@
+/* Empty. Add your own CSS if you like */
+.scroll{
+	height: 100% !important;
+}
+.change-bg{
+	background-color: #FF6681 !important;
+}
+.logo {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	height: 20%;
+	margin-top: 10%;
+}
+.logo img{
+	width: 100%;
+	height: 100%;
+}
+.white-text{
+	color : #303030;
+	font-weight: bold;
+	margin-left: 10%;
+	margin-right: 5%;
+	line-height: 34px;
+	margin-top: 10%;
+	font-style: italic;
+}
+.services {
+	color: white;
+	margin-top: 5% !important;
+	font-style: italic;
+	margin-left: 5% !important;
+}
+.offer-text {
+	color: white !important;
+	font-style: italic !important;
+}

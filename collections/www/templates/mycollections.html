@@ -1,0 +1,61 @@
+    <ion-view ng-init="getLibrary()" ng-controller="MycollectionController">
+    <ion-pane>
+      <ion-header-bar class="bar-dark" align-title="center">
+        
+        <div class="buttons">
+    <button ng-click="addMov()" class="button button-stable icon ion-plus-round"></button>
+  </div>
+
+        <h1 class="title">My Library</h1>
+        
+        <div class="buttons">
+    <button ng-click="refreshView()" class="button button-stable ion-refresh"></button>
+  </div>
+                  
+      </ion-header-bar>
+      
+
+      
+      <ion-content class="has-header has-footer">
+        
+        <div class="list" style="margin-bottom: 0px;">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Sort By
+          </div>
+          <select ng-model="moviesOrder">
+            <option value="rating">Highest Rating</option>
+            <option value="timestamp">Recent Added</option>
+    </select>
+        </label>
+
+        </div>
+      <ion-list >
+        
+  <ion-item class="item item-text-wrap item-button-right" ng-repeat="item in movieData | orderBy : moviesOrder : true">
+      <h2 class="padding-left">{{item.title}}</h2><p class="padding-left">{{item.release_year}}</p>
+      <ionic-ratings ratingsobj="ratingsObject" ratingsvalue="item.rating" class="padding-left" style="margin-top: 3%;"></ionic-ratings>
+      <button class="button button-static" ng-click="movDelete({{item.id}})">
+      <i class="icon ion-ios-trash"></i>
+    </button>
+      <div>
+        <button class="button button-small button-static" ng-click="movieInfo({{item.id}})"
+                style="margin-top: 6%;margin-left: 4%;width:30%;">More Info</button>
+      </div>
+  </ion-item>
+
+
+  
+</ion-list>
+  
+
+  
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

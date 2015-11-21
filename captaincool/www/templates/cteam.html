@@ -1,0 +1,39 @@
+<ion-view ng-init="getPlayers()">
+  <ion-pane>
+    <ion-header-bar class="bar-assertive" align-title="center">
+      <button ng-click="myTeam()" class="button button-clear icon-left ion-chevron-left"></button>
+    <h1 class="title">Captain Cool</h1>
+    
+    <button ng-click="refreshView()" class="button button-clear ion-refresh"></button>
+
+</ion-header-bar>  
+    <ion-content class="padding img-background">
+        
+        <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="pName">
+          </label>
+        </div>
+        
+        <div class="list card">
+          <div class="item item-divider item-royal item-button-right" style="padding-bottom: 4%;">
+            Selected Players - {{selectedCount}}
+            <button ng-click="updateTeam()" class="button button-assertive">Update</button>
+          </div>
+          <ul class="list">
+            <li class="item item-checkbox" ng-repeat="item in playerData | filter : pName">
+               <label class="checkbox">
+                 <input id={{item.id}} class="pselect" type="checkbox" ng-model="cStatus" ng-change="stateChanged(cStatus)">
+               </label>
+               <h2>{{item.name}}</h2>
+            <p>Batting Position : {{item.batting}}</p>
+            <p>Bowling Type : {{item.bowling}}</p>
+            </li>
+          </ul>
+        </div>
+      
+    
+    </ion-content>  
+  </ion-pane>
+</ion-view>

@@ -1,0 +1,61 @@
+    <ion-view cache-view="true">
+    <ion-pane>
+      <ion-header-bar class="bar-dark" align-title="center">
+
+        <h1 class="title">Suggest Movie</h1>
+
+              <div class="buttons">
+    <button ng-click="refreshView()" class="button button-clear ion-refresh"></button>
+  </div>
+
+      </ion-header-bar>
+      
+      <ion-content lazy-scroll class="has-header">
+
+       <div class="list" style="margin-bottom: 0px;">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Movie Name" ng-model="movName.name">
+          </label>
+          <button ng-click="searchMov()" class="button button-medium button-clear icon ion-search">
+          </button>
+        </div>
+      </div>
+       
+            <ion-list>
+        
+  <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movieData" >
+    
+    <img image-lazy-src="http://image.tmdb.org/t/p/w92/{{item.poster_path}}"
+         loader-class="image-loader-container" image-lazy-loader="lines" image-broken="{{item.poster_path}}" ng-hide="!item.poster_path" class="ng-hide" >
+    
+    <h2 class="padding-left">{{item.title}}</h2>
+      
+    <p class="padding-left">{{item.release_date | limitTo:4}}</p>
+    
+    <input type="hidden" id="t{{$index}}" value="{{item.title}}"/>
+    <input type="hidden" id="r{{$index}}" value="{{item.release_date | limitTo:4}}"/>
+     <input type="hidden" id={{$index}} value="0"/>
+     <input type="hidden" id=m{{$index}} value="{{item.id}}"/>
+    
+    <p class="padding-left" ng-click = "limit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
+        {{item.overview | limitTo:limit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
+      </p>
+    
+    <button class="button button-clear" ng-click="addMov($index)">
+      <i class="icon ion-thumbsup"></i>
+    </button>
+      
+
+  </ion-item>
+</ion-list>
+
+  
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

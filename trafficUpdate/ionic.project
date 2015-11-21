@@ -1,0 +1,10 @@
+{
+  "name": "trafficUpdate",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/maps/api/place/details/json",
+      "proxyUrl": "https://maps.googleapis.com"
+    }
+  ]
+}

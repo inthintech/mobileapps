@@ -1,0 +1,35 @@
+    <ion-view cache-view="false" ng-controller="ViewersController" ng-init="getViewers()">
+    <ion-pane>
+      <ion-header-bar class="bar-dark" align-title="center">
+          
+        <h1 class="title">Viewed By</h1>
+      </ion-header-bar>
+      
+      <ion-content class="has-header" >
+        
+       
+            <ion-list>
+        
+        
+  <ion-item class="item item-text-wrap item-avatar" ng-repeat="item in socialData">
+    
+    <img ng-src="{{item.picture}}"/>
+    
+    <h2>{{item.name}}</h2>
+
+  </ion-item>
+      
+ 
+        
+        
+</ion-list>
+
+  
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

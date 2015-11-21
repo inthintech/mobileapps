@@ -1,0 +1,45 @@
+    <ion-view cache-view="false" ng-init="getInfo()">
+    <ion-pane>
+      <ion-header-bar class="bar-dark" align-title="center">
+        
+        <div class="buttons">
+    <button ng-click="back()" class="button button-clear ion-arrow-left-c"></button>
+  </div>
+          
+        <h3 class="title">Movie Information</h3>
+      
+      </ion-header-bar>
+  
+      <ion-content lazy-scroll class="padding has-header" ng-repeat = "item in infoData">
+        
+                
+                <div class="movie-image" >
+                
+                <img image-lazy-src="http://image.tmdb.org/t/p/w342/{{item.poster_path}}"
+                     loader-class="image-loader-container-info" image-lazy-loader="lines" image-broken="{{item.poster_path}}"
+                     ng-hide="!item.poster_path" class="movie-image-img ng-hide" >
+                
+                </div>
+                
+                <h5 class="movie-info-header ng-hide" ng-hide="!item.title">Title</h5>
+                <h4 class="movie-info-content">{{item.title}}</h4>
+                
+                <h5 class="movie-info-header ng-hide" ng-hide="!item.title">Release Year</h5>
+                <h5 class="movie-info-content">{{item.release_date | limitTo:4}}</h5>
+                
+                <h5 class="movie-info-header ng-hide" ng-hide="!item.title">Genres</h5>
+                <h5 class="movie-info-content">{{item.genres}}</h5>
+                
+                <h5 class="movie-info-header ng-hide" ng-hide="!item.title">Synopsis</h5>
+                <p class="movie-info-synopsis">{{item.overview}}</p>
+      
+    
+    
+      
+  
+      </ion-content>
+
+      
+    </ion-pane>
+    
+    </ion-view>

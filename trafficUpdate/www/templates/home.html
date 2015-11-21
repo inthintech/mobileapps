@@ -1,0 +1,41 @@
+    <ion-view ng-init="init()">
+    <ion-pane>
+      <ion-header-bar class="bar-dark" align-title="center">
+        <h1 class="title">Home</h1>
+        <div class="buttons">
+    <button class="button button-assertive icon ion-android-exit"></button>
+  </div>
+      </ion-header-bar>
+      
+      <ion-content class="padding img-background">
+      
+      <div class="list card" style="width:80%;margin-left: auto;margin-right: auto;margin-top: 20%;">
+            <div class="item item-avatar">
+                <img ng-src="{{pic}}">
+                <h2>Welcome, {{name}}</h2>
+                
+       </div>
+      </div>
+            
+      <div class="card" style="width:80%;margin-left: auto;margin-right: auto;margin-top: 10%;">
+  <div class="item item-divider">
+    About Chennai Traffic Update
+  </div>
+  <div class="item item-text-wrap">
+    <p>This app has been designed to get information about traffic situation in chennai posted by other members.</p>
+    <br>
+    <p>The location information is obtained through Google Maps and identity is verified by Facebook integration.</p>
+    <br>
+    <p>To logout from the app use the logout button in the right corner.</p>
+  </div>
+</div>
+        </div>
+        
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

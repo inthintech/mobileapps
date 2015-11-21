@@ -1,0 +1,115 @@
+<ion-view ng-init="">
+  <ion-pane>
+    <ion-header-bar class="bar-assertive" align-title="center">
+    <h1 class="title">Captain Cool</h1>
+    <div class="buttons">
+    <button ng-click="refreshView()" class="button button-clear ion-refresh"></button>
+  </div>
+</ion-header-bar>  
+    <ion-content class="padding img-background">
+        
+        
+         <div class="list card game-box">
+          <div class="item item-divider item-royal">
+            Profile Info
+          </div>
+          <div class="item item-avatar item-text-wrap">
+            <img ng-src="img/ionic.png">
+            <h2>Player 1</h2>
+            <div class="row">
+              <div class="col center-align">
+                <p>Playing</p>
+              </div>
+              <div class="col">
+                Aggresive
+              </div>
+            </div>
+            <div class="row">
+              <div class="col center-align">
+                <p>Confidense</p>
+              </div>
+              <div class="col">
+                <meter value="2" min="0" max="10"></meter>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col center-align">
+                <p>Stamina</p>
+              </div>
+              <div class="col">
+                <meter value="7" min="0" max="10"></meter>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col center-align">
+                <p>Pressure</p>
+              </div>
+              <div class="col">
+                <meter value="2" min="0" max="10"></meter>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+         
+         <div class="list card game-box">
+          <div class="item item-divider item-royal">
+            Profile Info
+          </div>
+          <div class="item item-avatar item-text-wrap">
+            <img ng-src="img/ionic.png">
+            <h2>Player 1</h2>
+            <div class="row">
+              <div class="col center-align">
+                <p>Playing</p>
+              </div>
+              <div class="col">
+                Aggresive
+              </div>
+            </div>
+            <div class="row">
+              <div class="col center-align">
+                <p>Confidense</p>
+              </div>
+              <div class="col">
+                <meter value="2" min="0" max="10"></meter>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col center-align">
+                <p>Stamina</p>
+              </div>
+              <div class="col">
+                <meter value="2" min="0" max="10"></meter>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col center-align">
+                <p>Pressure</p>
+              </div>
+              <div class="col">
+                <meter value="2" min="0" max="10"></meter>
+              </div>
+            </div>
+            <h2>Approach</h2>
+            <div class="row">
+              <div class="col">
+                <button ng-click="refreshView()" class="button button-assertive">A</button>
+              </div>
+              <div class="col">
+                <button ng-click="refreshView()" class="button button-positive">B</button>
+              </div>
+               <div class="col">
+                <button ng-click="refreshView()" class="button button-energized">D</button>
+              </div>
+            </div>
+          </div>
+        </div>
+         
+         
+         <button ng-click="refreshView()" class="button button-positive next-ball">Next Ball</button>
+    
+    
+    </ion-content>  
+  </ion-pane>
+</ion-view>

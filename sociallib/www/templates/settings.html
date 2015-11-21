@@ -1,0 +1,38 @@
+    <ion-view ng-controller="SettingsController" ng-init="getProfile()" cache-view="false">
+    <ion-pane>
+      <ion-header-bar class="bar-dark " align-title="center">
+        <div class="buttons">
+    <button ng-click="back()" class="button button-clear ion-arrow-left-c"></button>
+  </div>
+        <h1 class="title">Options</h1>
+      </ion-header-bar>
+      <ion-content class="padding">
+        
+        <div class="list card">
+<div class="item item-divider">
+    Profile
+  </div>
+  <div class="item item-avatar item-button-right item-text-wrap">
+    <img ng-src="{{profileData.picture.data.url}}">
+    <h2>{{profileData.name}}</h2>
+    <button ng-click="logout()" class="button button-assertive">Logout</button>
+  </div>
+</div>
+        
+        <div class="list card">
+<div class="item item-divider">
+    Credits
+  </div>
+  <div class="item item-thumbnail-left item-text-wrap">
+    <img src="img/tmdb.png" style="width:40%;height:70%;">
+    <h2>themoviedb.org</h2>
+    <p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
+</div>
+
+      </ion-content>
+      
+
+      
+
+    </ion-pane>
+    </ion-view>

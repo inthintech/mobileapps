@@ -1,0 +1,38 @@
+<ion-view ng-init="getPlayers()">
+  <ion-pane>
+    <ion-content class="padding img-background">
+        
+        <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="pName">
+          </label>
+        </div>
+        
+        <div class="list card">
+          <div class="item item-divider item-royal">
+            Selected Facebook Friends - {{selectedCount}}
+          </div>
+          <ul class="list">
+            
+            <li class="item item-checkbox" ng-repeat="item in playerData | filter : pName">
+               <label class="checkbox">
+                 <input id={{item.id}} type="checkbox" ng-model="cStatus" ng-change="stateChanged(cStatus,this.id)">
+               </label>
+               <h2>{{item.name}}</h2>
+            </li>
+            
+          </ul>
+        </div>
+      
+    
+    </ion-content>  
+  </ion-pane>
+</ion-view>
+<div class="bar bar-dark bar-footer">
+  <button ng-click="myTeam()" class="button button-clear icon-left ion-chevron-left "></button>
+  <div class="title">
+    
+  </div>
+  <button ng-click="changeTeam()" class="button button-assertive">Proceed</button>
+</div>

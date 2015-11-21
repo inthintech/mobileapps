@@ -1,0 +1,72 @@
+    <ion-view ng-controller="MainController" ng-init="getProfile()" cache-view="true">
+    <ion-pane>
+      <ion-header-bar class="bar-dark has-subheader" align-title="center">
+        
+        <div class="buttons">
+    <button ng-click="add()" class="button button-clear ion-plus-round"></button>
+  </div>
+
+        <h1 class="title">Social Movie Library</h1>
+        
+              <div class="buttons">
+    <button ng-click="refreshView()" class="button button-clear ion-refresh"></button>
+  </div>
+                  
+             
+                  
+                  
+                  
+      </ion-header-bar>
+      
+      <div class="bar bar-subheader bar-positive">
+        <div class="buttons">
+                  <button class="button button-clear" ng-click="searchFilter(searchFlag)">
+                  <i id="searchFilter" class="icon ion-search nohighlight"></i>
+                  </button>
+                  <button class="button button-clear" ng-click="setFilter(filterFlag)">
+                  <i id="setFilter" class="icon ion-funnel nohighlight"></i>
+                  </button>
+              </div>
+        <h2 class="title"><i ng-click="gotoOptions()" class="icon ion-gear-b" style="color:#444;font-size:1.6em;"></i></h2>
+              <div class="buttons">
+                  
+                  <button class="button button-clear" ng-click="sortByTime()">
+                  <i id="sortTime" class="icon ion-android-time nohighlight"></i>
+                  </button>
+                  
+                  <button class="button button-clear" ng-click="sortByRating()">
+                  <i id="sortRating" class="icon ion-android-star highlight"></i>
+                  </button>
+              </div>
+      </div>     
+      
+      <ion-content class="has-header has-subheader has-footer">
+        
+      <ion-list>
+        
+  <ion-item class="item item-text-wrap item-button-right" ng-repeat="item in movieData | orderBy : moviesOrder : true | filter : queryRes">
+      <h2 class="padding-left">{{item.title}}</h2><p class="padding-left">{{item.release_year}}</p>
+      <ionic-ratings ratingsobj="ratingsObjectStatic" ratingsvalue="item.rating" class="padding-left" style="margin-top: 3%;"></ionic-ratings>
+      
+      <div class="buttons">
+      <button class="button button-clear" ng-click="viewersList({{item.id}})">
+      <i class="icon ion-person-stalker"></i>
+      </button>
+      <button class="button button-clear" ng-click="movDelete({{item.id}})" ng-hide="item.status==0" class="ng-hide">
+      <i class="icon ion-ios-trash"></i>
+      </button>
+      </div>
+      
+      <div>
+        <input type="hidden" value="{{item.timestamp}}"/>
+        <input type="hidden" value="{{item.status}}"/>
+        <button class="button button-small button-static" ng-click="getMovieInfo({{item.id}})"
+                style="margin-top: 6%;margin-left: 4%;width:30%;">More Info</button>
+      </div>
+  </ion-item>
+  
+</ion-list>
+      </ion-content>
+        
+    </ion-pane>
+    </ion-view>
