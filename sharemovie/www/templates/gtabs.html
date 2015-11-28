@@ -1,0 +1,30 @@
+ 
+<ion-view cache-view="false">
+<ion-tabs class="tabs-positive tabs-icon-only">
+  
+    <ion-tab icon="ion-person-stalker" href="#/gtab/member/{{groupId}}/{{groupName}}">
+    <!-- Tab 1 content -->
+    <ion-nav-view name="member-tab"></ion-nav-view>
+    </ion-tab>
+    
+    <ion-tab icon="ion-android-film" href="#/gtab/movie/{{groupId}}/{{groupName}}">
+    <!-- Tab 1 content -->
+    <ion-nav-view name="movie-tab"></ion-nav-view>
+    </ion-tab>
+  
+  
+</ion-tabs>
+
+<ion-header-bar class="bar-positive" align-title="center">
+        <button ng-click="gotoGroup()" class="button button-clear ion-chevron-left"></button>
+        <h1 class="title">{{groupName}}</h1>
+        <button ng-click="" class="button button-clear icon ion-plus-round"></button>
+
+</ion-header-bar>
+</ion-view>
+<!--
+<div class="bar bar-footer bar-dark">
+  
+</div>
+
+-->
