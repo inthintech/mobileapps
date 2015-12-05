@@ -1,4 +1,4 @@
-    <ion-view ng-init="" cache-view="false">
+    <ion-view ng-init="getMemberData()" cache-view="false">
     <ion-pane>
       
       
@@ -8,7 +8,7 @@
       <div class="list list-inset">
           <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="gName">
+            <input type="text" placeholder="Search" ng-model="$parent.memName">
           </label>
       </div>
       
@@ -22,6 +22,13 @@
       </div>
       
       -->
+      
+      <div class="list">
+        <a class="item item-avatar" href="#" ng-repeat="item in memData | filter : memName">
+          <img ng-src="{{item.profile_pic_url}}">
+          <h2>{{item.name}}</h2>
+        </a>
+      </div>
   
         
       </ion-content>

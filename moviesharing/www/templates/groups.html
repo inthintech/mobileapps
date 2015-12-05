@@ -1,0 +1,60 @@
+    <ion-view ng-init="" cache-view="false">
+    <ion-pane>
+      
+      <ion-header-bar class="bar-positive" align-title="center">
+        
+        <h1 class="title">Groups</h1>
+        <!--
+        <button ng-click="gotoAddGroup()" class="button button-clear icon ion-plus-round"></button>
+        -->
+
+      </ion-header-bar>
+      <ion-content class="change-bg-image">
+      
+      <!--
+      <div class="list" style="margin-bottom: 0px;">
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search" ng-model="$parent.grpName">
+    </label>
+    <button ng-click="gotoAddGroup()" class="button button-assertive icon ion-plus-round"></button>
+  </div>
+
+</div>
+-->
+      
+      
+      <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="$parent.groupFilterName" maxlength="50">
+          </label>
+      </div>
+      
+      <!-- 
+      <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="gName">
+          </label>
+          <button ng-click="gotoAddGroup()" class="button button-assertive icon ion-plus-round"></button>
+      </div>
+      -->
+
+      <div class="list">
+        <a class="item item-avatar" href="#/tab/movie/{{item.group_id}}/{{item.group_name}}" ng-repeat="item in groupData | filter : groupFilterName">
+          <img src="img/ionic.png">
+          <h2>{{item.group_name}}</h2>
+          <p>{{item.member_cnt}} {{item.member_cnt>1 ? "Members" : "Member" }}</p>
+        </a>
+      </div>
+        
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

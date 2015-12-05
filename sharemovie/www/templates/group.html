@@ -4,6 +4,7 @@
       
       <ion-content>
       
+      <!--
       <div class="list" style="margin-bottom: 0px;">
   <div class="item item-input-inset">
     <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
@@ -13,7 +14,17 @@
     <button ng-click="gotoAddGroup()" class="button button-assertive icon ion-plus-round"></button>
   </div>
 
-</div>  
+</div>
+-->
+      
+      
+      <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="$parent.grpName" maxlength="50">
+          </label>
+      </div>
+      
       <!-- 
       <div class="list list-inset">
           <label class="item item-input">
@@ -25,7 +36,7 @@
       -->
 
       <div class="list">
-        <a class="item item-avatar" href="#/gtab/member/{{item.group_id}}/{{item.group_name}}" ng-repeat="item in grpData | filter : gName">
+        <a class="item item-avatar" href="#/gtab/movie/{{item.group_id}}/{{item.group_name}}" ng-repeat="item in grpData | filter : grpName">
           <img src="img/ionic.png">
           <h2>{{item.group_name}}</h2>
           <p>{{item.member_cnt}} {{item.member_cnt>1 ? "Members" : "Member" }}</p>

@@ -15,12 +15,12 @@
 </ion-list>
   -->
        <div class="list" style="margin-bottom: 0px;">
-
   <div class="item item-input-inset">
-    <label class="item-input-wrapper">
-      <input type="text" placeholder="Movie Name" ng-model="$parent.movName">
+    <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search any movie by name" ng-model="$parent.movName">
     </label>
-    <button ng-click="searchMov()" class="button button-small button-clear icon ion-search">
+    <button ng-click="searchMov()" class="button button-stable icon ion-search">
     </button>
   </div>
 </div>
@@ -36,25 +36,18 @@
     <p class="padding-left">{{item.release_date | limitTo:4}}</p>
     
     <input type="hidden" id="t{{$index}}" value="{{item.title}}"/>
-    <input type="hidden" id="r{{$index}}" value="{{item.release_date | limitTo:4}}"/>
-     <input type="hidden" id={{$index}} value="0"/>
+    <input type="hidden" id="y{{$index}}" value="{{item.release_date | limitTo:4}}"/>
+     <input type="hidden" id=p{{$index}} value="{{item.poster_path}}"/>
      <input type="hidden" id=m{{$index}} value="{{item.id}}"/>
     
     <p class="padding-left" ng-click = "limit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
         {{item.overview | limitTo:limit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
       </p>
     
-    <button class="button button-static" ng-click="hideAdd=false;expand()">
+    <button class="button button-clear" ng-click="addMov($index)">
       <i class="icon ion-plus-round"></i>
     </button>
       
-      <div>
- 
-        
-        <button ng-hide="hideAdd" class="button button-small button-assertive ng-hide padding-left" 
-        ng-click="" style="margin-top: 6%;width:50%;">Add Movie</button>
-      </div>
-
   </ion-item>
 </ion-list>
 
