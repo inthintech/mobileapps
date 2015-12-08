@@ -1,0 +1,44 @@
+    <ion-view ng-init="getMovieData()" cache-view="false">
+    <ion-pane>
+      
+      
+      <ion-content>
+        
+       
+      <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="$parent.movName">
+          </label>
+      </div>
+       
+       
+       <ion-list>
+        
+  <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movData | filter : movName">
+    
+    <img ng-src="http://image.tmdb.org/t/p/w185/{{item.image}}" ng-hide="!item.image" class="ng-hide" >
+    
+    <h2>{{item.movie_name}}</h2>
+      
+    <p>{{item.year}}</p>
+    
+    <p>By {{item.shared_by}}</p>
+    
+    <button class="button button-clear" ng-click="">
+      <i class="icon ion-thumbsup"></i>{{item.votes}}
+    </button>
+      
+  </ion-item>
+</ion-list>
+
+      
+        
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

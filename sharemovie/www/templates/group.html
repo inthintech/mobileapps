@@ -1,86 +1,31 @@
-    <ion-view ng-init="getGroupData()" cache-view="false">
+    <ion-view ng-init="startHere()" cache-view="false">
     <ion-pane>
       
       
       <ion-content>
       
-      <!--
+      
       <div class="list" style="margin-bottom: 0px;">
-  <div class="item item-input-inset">
-    <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
-      <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search" ng-model="$parent.grpName">
-    </label>
-    <button ng-click="gotoAddGroup()" class="button button-assertive icon ion-plus-round"></button>
-  </div>
-
-</div>
--->
-      
-      
-      <div class="list list-inset">
-          <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="$parent.grpName" maxlength="50">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Filter by Group Name" ng-model="$parent.groupName">
           </label>
+          <button ng-click="gotoAddGroup()" class="button button-stable icon ion-plus-round"></button>
+        </div>
       </div>
-      
-      <!-- 
-      <div class="list list-inset">
-          <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="gName">
-          </label>
-          <button ng-click="gotoAddGroup()" class="button button-assertive icon ion-plus-round"></button>
-      </div>
-      -->
 
+    
       <div class="list">
-        <a class="item item-avatar" href="#/gtab/movie/{{item.group_id}}/{{item.group_name}}" ng-repeat="item in grpData | filter : grpName">
-          <img src="img/ionic.png">
+        <a class="item item-avatar item-button-right" href="#/gtab/movie/{{item.group_id}}/{{item.group_name}}" ng-repeat="item in grpData | filter : groupName">
+          <img src="img/group.png">
           <h2>{{item.group_name}}</h2>
           <p>{{item.member_cnt}} {{item.member_cnt>1 ? "Members" : "Member" }}</p>
+          
         </a>
       </div>
       
-    
-      <!--
-      <ion-list>
-        
-  <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in grpData">
-    
-    <img image-lazy-src="http://image.tmdb.org/t/p/w500/{{item.poster_path}}"
-         loader-class="image-loader-container" image-lazy-loader="android" image-broken="{{item.poster_path}}" ng-hide="!item.poster_path" class="ng-hide" >
-    
-    <h2 class="padding-left">{{item.title}}</h2>
-      
-    <p class="padding-left">{{item.release_date | limitTo:4}}</p>
-    
-    <input type="hidden" id="t{{$index}}" value="{{item.title}}"/>
-    <input type="hidden" id="r{{$index}}" value="{{item.release_date | limitTo:4}}"/>
-     <input type="hidden" id={{$index}} value="0"/>
-     <input type="hidden" id=m{{$index}} value="{{item.id}}"/>
-    
-    <p class="padding-left" ng-click = "limit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
-        {{item.overview | limitTo:limit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
-      </p>
-    
-    <button class="button button-static" ng-click="hideAdd=false;expand()">
-      <i class="icon ion-plus-round"></i>
-    </button>
-      
-      <div>
-        <ionic-ratings ratingsobj="ratingsObject" ng-hide="hideAdd" ratingsobjid=$index 
-        class="ng-hide padding-left" style="margin-top: 3%;"></ionic-ratings>
-        
-        <button ng-hide="hideAdd" class="button button-small button-assertive ng-hide padding-left" 
-        ng-click="addMov($index)" style="margin-top: 6%;width:50%;">Add Movie</button>
-      </div>
-
-  </ion-item>
-</ion-list>
-      
-      -->
+  
         
       </ion-content>
 

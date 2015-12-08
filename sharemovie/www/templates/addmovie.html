@@ -18,9 +18,9 @@
   <div class="item item-input-inset">
     <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search any movie by name" ng-model="$parent.movName">
+      <input type="text" placeholder="Search any movie by name" ng-model="$parent.newMovieName">
     </label>
-    <button ng-click="searchMov()" class="button button-stable icon ion-search">
+    <button ng-click="searchMovie()" class="button button-stable icon ion-search">
     </button>
   </div>
 </div>
@@ -29,7 +29,7 @@
         
   <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movieData">
     
-    <img ng-src="http://image.tmdb.org/t/p/w500/{{item.poster_path}}" ng-hide="!item.poster_path" class="ng-hide" >
+    <img ng-src="http://image.tmdb.org/t/p/w185/{{item.poster_path}}" ng-hide="!item.poster_path" class="ng-hide" >
     
     <h2 class="padding-left">{{item.title}}</h2>
       
@@ -40,11 +40,11 @@
      <input type="hidden" id=p{{$index}} value="{{item.poster_path}}"/>
      <input type="hidden" id=m{{$index}} value="{{item.id}}"/>
     
-    <p class="padding-left" ng-click = "limit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
-        {{item.overview | limitTo:limit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
+    <p class="padding-left" ng-click = "descLimit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
+        {{item.overview | limitTo:descLimit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
       </p>
     
-    <button class="button button-clear" ng-click="addMov($index)">
+    <button class="button button-clear" ng-click="addMovie($index)">
       <i class="icon ion-plus-round"></i>
     </button>
       

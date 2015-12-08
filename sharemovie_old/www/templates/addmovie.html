@@ -1,0 +1,62 @@
+    <ion-view cache-view="false">
+    <ion-pane>
+      
+      
+      <ion-content>
+        
+       <!-- 
+      <ion-list>
+        
+  <ion-item class="item item-text-wrap" >
+      <h2 class="padding-left">The Matrix</h2><p class="padding-left">1999</p>
+      <rating ng-model="rate" max="max"></rating>
+  </ion-item>
+  
+</ion-list>
+  -->
+       <div class="list" style="margin-bottom: 0px;">
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search any movie by name" ng-model="$parent.movName">
+    </label>
+    <button ng-click="searchMov()" class="button button-stable icon ion-search">
+    </button>
+  </div>
+</div>
+       
+            <ion-list>
+        
+  <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movieData">
+    
+    <img ng-src="http://image.tmdb.org/t/p/w500/{{item.poster_path}}" ng-hide="!item.poster_path" class="ng-hide" >
+    
+    <h2 class="padding-left">{{item.title}}</h2>
+      
+    <p class="padding-left">{{item.release_date | limitTo:4}}</p>
+    
+    <input type="hidden" id="t{{$index}}" value="{{item.title}}"/>
+    <input type="hidden" id="y{{$index}}" value="{{item.release_date | limitTo:4}}"/>
+     <input type="hidden" id=p{{$index}} value="{{item.poster_path}}"/>
+     <input type="hidden" id=m{{$index}} value="{{item.id}}"/>
+    
+    <p class="padding-left" ng-click = "limit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
+        {{item.overview | limitTo:limit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
+      </p>
+    
+    <button class="button button-clear" ng-click="addMov($index)">
+      <i class="icon ion-plus-round"></i>
+    </button>
+      
+  </ion-item>
+</ion-list>
+
+  
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

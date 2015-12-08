@@ -1,0 +1,38 @@
+    <ion-view>
+    <ion-pane>
+      <ion-header-bar class="bar-positive">
+        <button ng-click="gotoGroup()" class="button button-clear ion-chevron-left"></button>
+        <h1 class="title">Groups</h1>
+        
+
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        
+
+      <span class="item group-name" style="border-color: #fff;text-align: center;">
+      <h2>Add New Group</h2>
+      <br>
+      <p>Enter Group Name (Max 50 Characters)</p>
+      </span>
+      
+
+        
+      <div class="list">
+  <label class="item item-input" style="margin-top: 5%;width:80%;margin-left: auto;margin-right: auto;">
+    <input type="text" ng-model="$parent.grpName">
+  </label>
+
+</div>
+      
+      <button class="button button-assertive center-button" ng-click="addGroup()">
+          Create</button>
+      
+      </ion-content>
+
+
+
+        
+    </ion-pane>
+    
+    </ion-view>

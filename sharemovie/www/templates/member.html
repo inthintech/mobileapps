@@ -4,14 +4,14 @@
       
       <ion-content>
         
-       
+       <!--
       <div class="list list-inset">
           <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="$parent.memName">
+            <input type="text" placeholder="Search" ng-model="$parent.memberName">
           </label>
       </div>
-      
+      -->
       <!--
       <div class="list">
         <a class="item item-avatar" href="#" ng-repeat="item in grpData | filter : gName">
@@ -23,9 +23,20 @@
       
       -->
       
+       <div class="list" style="margin-bottom: 0px;">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Filter by Member Name" ng-model="$parent.memberName">
+          </label>
+          <button ng-click="gotoAddMember()" class="button button-stable icon ion-plus-round"></button>
+        </div>
+      </div>
+       
+      
       <div class="list">
-        <a class="item item-avatar" href="#" ng-repeat="item in memData | filter : memName">
-          <img ng-src="{{item.profile_pic_url}}">
+        <a class="item item-avatar" href="#" ng-repeat="item in memData | filter : memberName">
+          <img ng-src="https://graph.facebook.com/v2.5/{{item.id}}/picture?&type=small">
           <h2>{{item.name}}</h2>
         </a>
       </div>

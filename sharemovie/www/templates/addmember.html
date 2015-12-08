@@ -1,4 +1,4 @@
-    <ion-view ng-init="getMemberData()" cache-view="false">
+    <ion-view ng-init="searchMember()" cache-view="false">
     <ion-pane>
       
       
@@ -8,21 +8,21 @@
       <div class="list list-inset">
           <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="$parent.memName" maxlength="50">
+            <input type="text" placeholder="Search" ng-model="$parent.newMemberName" maxlength="50">
           </label>
       </div>
        
        
        <ion-list>
         
-  <ion-item class="item item-text-wrap item-avatar item-button-right" ng-repeat="item in memData | filter : memName">
+  <ion-item class="item item-text-wrap item-avatar item-button-right" ng-repeat="item in newMemData | filter : newMemberName">
     
     <img ng-src="{{item.picture.data.url}}" >
     
     <h2>{{item.name}}</h2>
       
     
-    <button class="button button-clear" ng-click="addMem($index)">
+    <button class="button button-clear" ng-click="addMember(item.id)">
       <i class="icon ion-plus-round"></i>
     </button>
       

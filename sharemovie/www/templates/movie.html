@@ -4,18 +4,42 @@
       
       <ion-content>
         
-       
+      <!-- 
       <div class="list list-inset">
           <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
             <input type="text" placeholder="Search" ng-model="$parent.movName">
           </label>
       </div>
+      -->
+      
+       <div class="list" style="margin-bottom: 0px;">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" style="font-size: 16px;line-height:3;">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Filter by Movie Name" ng-model="$parent.movieName">
+          </label>
+          <button ng-click="gotoAddMovie()" class="button button-stable icon ion-plus-round"></button>
+        </div>
+      </div>
+       
+       <ul class="list" style="margin-bottom: 0px;">
+
+  <li class="item item-toggle">
+     Sort by Recently Added
+     <label class="toggle toggle-assertive">
+       <input type="checkbox" ng-model="$parent.recentAddedSortValue" ng-change="sortChange()">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+</ul>
        
        
        <ion-list>
         
-  <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movData | filter : movName">
+  <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movData | orderBy : sortParam : true | filter : movieName">
     
     <img ng-src="http://image.tmdb.org/t/p/w185/{{item.image}}" ng-hide="!item.image" class="ng-hide" >
     
@@ -25,7 +49,9 @@
     
     <p>By {{item.shared_by}}</p>
     
-    <button class="button button-clear" ng-click="">
+    <input type="hidden" value="{{item.timestamp}}"/>
+    
+    <button class="button button-clear" ng-click="voteMovie({{item.movie_id}})">
       <i class="icon ion-thumbsup"></i>{{item.votes}}
     </button>
       

@@ -24,84 +24,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
 
 }])
 
-
 .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-        .state('test', {
-                url: '/test',
-                templateUrl: 'templates/test.html'
-            })
+           
             .state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
                 controller: 'LoginController'
             })
-            .state('tabs', {
+            
+            .state('tab', {
                 url: '/tab',
                 abstract: true,
-                templateUrl: 'templates/tabs.html',
-                controller: 'tabController'
+                templateUrl: 'templates/tab.html'
               })
             
-             .state('gtabs', {
-                url: '/gtab',
-                abstract: true,
-                templateUrl: 'templates/gtabs.html',
-                controller: 'gtabController'
-              })
-             
-             .state('gtabs.member', {
-                url: '/member/:gId/:gName',
-                views: {
-                  'member-tab' : {
-                    templateUrl: 'templates/member.html',
-                    controller: 'MemberController'
-                  }
-                }
-              })
-             
-             .state('gtabs.movie', {
-                url: '/movie/:gId/:gName',
-                views: {
-                  'movie-tab' : {
-                    templateUrl: 'templates/movie.html',
-                    controller: 'MovieController'
-                  }
-                }
-              })
-             
-             .state('gtabs.addmovie', {
-                url: '/addmovie/:gId/:gName',
-                views: {
-                  'addmovie-tab' : {
-                    templateUrl: 'templates/addmovie.html',
-                    controller: 'AddMovieController'
-                  }
-                }
-              })
-             
-             .state('gtabs.addmember', {
-                url: '/addmember/:gId/:gName',
-                views: {
-                  'addmember-tab' : {
-                    templateUrl: 'templates/addmember.html',
-                    controller: 'AddMemberController'
-                  }
-                }
-              })
-             
-             /*
-             .state('gtabs.addmovie', {
-                url: '/movie/addmovie/:gId/:gName',
-                views: {
-                  'movie-tab' : {
-                    templateUrl: 'templates/addmovie.html',
-                    controller: 'AddMovieController'
-                  }
-                }
-              })*/
-            
-            .state('tabs.group', {
+            .state('tab.group', {
                 url: '/group',
                 views: {
                   'group-tab' : {
@@ -111,36 +49,72 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
                 }
               })
             
-            .state('tabs.addgroup', {
-                url: '/addgroup',
+            .state('tab.profile', {
+                url: '/profile',
                 views: {
-                  'addgroup-tab' : {
-                    templateUrl: 'templates/addgroup.html',
-                    controller: 'GroupController'
+                  'profile-tab' : {
+                    templateUrl: 'templates/profile.html'
                   }
                 }
               })
             
-            /*
-            .state('tabs.addgroup', {
-                url: '/group/addgroup/',
+            .state('tab.addgroup', {
+                url: '/group/addgroup',
                 views: {
                   'group-tab' : {
                     templateUrl: 'templates/addgroup.html',
                     controller: 'GroupController'
                   }
                 }
-              })*/
+              })
             
-            .state('tabs.profile', {
-                url: '/profile',
+            .state('gtab', {
+                url: '/gtab',
+                abstract: true,
+                templateUrl: 'templates/gtab.html',
+                controller: 'GroupController'
+              })
+             
+             .state('gtab.member', {
+                url: '/member/:gId/:gName',
                 views: {
-                  'profile-tab' : {
-                    templateUrl: 'templates/profile.html',
-                    controller: 'ProfileController'
+                  'member-tab' : {
+                    templateUrl: 'templates/member.html',
+                    controller: 'GroupController'
+                  }
+                }
+              })
+             
+             .state('gtab.movie', {
+                url: '/movie/:gId/:gName',
+                views: {
+                  'movie-tab' : {
+                    templateUrl: 'templates/movie.html',
+                    controller: 'GroupController'
+                  }
+                }
+              })
+             
+             .state('gtab.addmovie', {
+                url: '/addmovie/:gId/:gName',
+                views: {
+                  'movie-tab' : {
+                    templateUrl: 'templates/addmovie.html',
+                    controller: 'GroupController'
+                  }
+                }
+              })
+             
+             .state('gtab.addmember', {
+                url: '/addmember/:gId/:gName',
+                views: {
+                  'member-tab' : {
+                    templateUrl: 'templates/addmember.html',
+                    controller: 'GroupController'
                   }
                 }
               });
+        
         $urlRouterProvider.otherwise('/tab/group');
         
     })
@@ -154,18 +128,20 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
       template: '<ion-spinner></ion-spinner>'
     });
     };
-
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
     
-  $scope.login = function() {
+    $scope.hide = function(){
+        $ionicLoading.hide();
+    };
+    
+    $scope.login = function() {
     
     /*----- QUIT app if no internet connectivity is found------- */
     
     $ionicPlatform.ready(function() {
+      
         if(window.Connection) {
-                    if(navigator.connection.type == Connection.NONE) {
+                    if(navigator.connection.type == Connection.NONE)
+                    {
                         $ionicPopup.alert({
                             title: "Internet Disconnected",
                             content: "The internet is disconnected on your device."
@@ -174,76 +150,152 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
                             ionic.Platform.exitApp();
                         });
                     }
-                }
-    });
-    
-    /* ------------------------------------------------------------- */
-    
-    $cordovaFacebook.login(["public_profile","user_friends"])
-      .then(function(success) {
-        
-        //console.log(success.authResponse.accessToken);
-        //$state.go("tabs.group");
-        //console.log('Logged In');
-        
-        $localStorage.accessToken = success.authResponse.accessToken;
-        $scope.show($ionicLoading);
-        $http.get("http://api.keyrelations.in/sharemovie/login/"+success.authResponse.accessToken)
-              .then(function(result) {
+                    else
+                    {
+                       //console.log("show");
+                        
+                        var confirmPopup = $ionicPopup.confirm({
+                          title: 'Facebook Login',
+                          template: 'This app uses facebook login to authenticate. Do you want to proceed?'
+                        });
+                        confirmPopup.then(function(res) {
+                          if(res) {
+                            //console.log('You are sure');
+                            
+                            /* ---------------------Start of API Call------------------------- */
+                        
+                                        $cordovaFacebook.login(["public_profile","user_friends"]).then(
+                                        
+                                        function(success) {
+                                          
+                                          //console.log(success);
+                                          //$state.go("home");
+                                          //console.log('Logged In');
+                                          
+                                          $localStorage.accessToken = success.authResponse.accessToken;
+                                          
+                                          
+                                          
+                                          //$localStorage.userId = success.authResponse.userID;
+                                          
+                                          $scope.show($ionicLoading);
+                                          
+                                          $http.get("http://api.keyrelations.in/sharemovie/login/"+success.authResponse.accessToken)
+                                                .then(function(result) {
+                                                  
+                                                  if (!result.data.hasOwnProperty('error')) {
+                                                    $scope.hide($ionicLoading);
+                                                    $localStorage.userId = success.authResponse.userID;
+                                                    $state.go("tab.group");
+                                                  }
+                                                  else
+                                                  {
+                                                    $scope.hide($ionicLoading);
+                                                    $ionicPopup.alert({
+                                                      title: 'Alert',
+                                                      template: 'Bad response from server!'
+                                                    });
+                                                    return false;
+                                                  }
+                                                  
+                                              }, function(error) {
+                                                  $scope.hide($ionicLoading);
+                                                  $ionicPopup.alert({
+                                                    title: 'Alert',
+                                                    template: 'Unable to reach app server!'
+                                                  });
+                                                  //console.log(error);
+                                                  return false;
+                                              });    
+                                          
+                                          
+                                        },
+                                        
+                                        function (error) {
+                                          
+                                            $ionicPopup.alert({
+                                                      title: 'Error',
+                                                      template: 'Unable to reach facebook servers!'
+                                            });
+                                        
+                                            });
+                                        
+                                       
                 
-                if (result.data.hasOwnProperty('success')) {
-                  $scope.hide($ionicLoading);
-                  //console.log(result.data.success);
-                  $localStorage.userId = result.data.success;
-                  $state.go("tabs.group");
-                }
-                else
-                {
-                  $scope.hide($ionicLoading);
-                  $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Bad response from server!'
+                                  }
+                              else {
+                                //console.log('You are not sure');
+                                ionic.Platform.exitApp();
+                              }
+                              
+                            });
+                                 
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
                   });
-                  return false;
-                }
-                
-            }, function(error) {
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });    
-        
-        
-      }, function (error) {
-        
-          $ionicPopup.alert({
-                    title: 'Error',
-                    template: 'Unable to reach facebook servers!'
-          });
-      
-        });
-    
-    
-  }
-  
-  
+    /****************** END FUNCTION ******************/  
+    };
+
 })
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.controller("GroupController", function($ionicPlatform,$localStorage,$scope,$state,$ionicPopup,$http,$ionicLoading) {
+.controller("GroupController", function($ionicPlatform,$location,$localStorage,$scope,$cordovaFacebook,$state,$ionicPopup,$http,$ionicLoading) {
   
- // console.log("test");
- 
- 
- //window.location.reload(true);
+   $scope.groupIdParam=$state.params.gId;
+   $scope.groupNameParam=$state.params.gName;
+    $scope.descLimit = 100;
+   
+   $scope.gotoGroup = function() {
+    //$scope.groupIdParam='';
+    //$scope.groupNameParam='';
+    $state.go("tab.group");
+  };
+  
+  $scope.gotoAddGroup = function() {
+    $state.go("tab.addgroup");
+  };
+  
+  $scope.gotoAddMovie = function() {
+    $state.go("gtab.addmovie",{gId:$scope.groupIdParam,gName:$scope.groupNameParam});
+  };
+  
+   $scope.gotoAddMember = function() {
+    $state.go("gtab.addmember",{gId:$scope.groupIdParam,gName:$scope.groupNameParam});
 
-  $scope.getGroupData = function() {
+  };
+   
+   $scope.show = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner></ion-spinner>'
+    });
+    };
+    
+    $scope.hide = function(){
+        $ionicLoading.hide();
+    };
+    
+    $scope.startHere = function() {
+      
+      if($localStorage.hasOwnProperty("userId") === false)
+      {
+         //console.log("Login");
+         //$scope.login();
+         $state.go("login");
+      }
+      else
+      {
+        //console.log("Group");
+        $scope.groupIdParam='';
+        $scope.groupNameParam='';
+        $scope.getGroupData();
+      }   
+    };
+    
+  
+    $scope.groupName = '';
+    $scope.getGroupData = function() {
     
         /*----- QUIT app if no internet connectivity is found------- */
     
@@ -258,83 +310,42 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
                                   ionic.Platform.exitApp();
                               });
                           }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            $scope.show($ionicLoading);
+                            $http.get("http://api.keyrelations.in/sharemovie/getusergroups/"+$localStorage.userId)
+                                .then(function(result) {
+                                  
+                                    $scope.grpData = result.data.output;
+                                    $scope.hide($ionicLoading);                 
+                                  
+                              }, function(error) {
+                                  //console.log(error);
+                                  $scope.hide($ionicLoading);
+                                  $ionicPopup.alert({
+                                    title: 'Alert',
+                                    template: 'Unable to reach app server!'
+                                  });
+                                  //console.log(error);
+                                  return false;
+                              }); 
+                          
+                           /****************** END API CALL ******************/                      
+                         }
                       }
-          });
-        
-        $scope.show($ionicLoading);
-          $http.get("http://api.keyrelations.in/sharemovie/getmygroups/"+$localStorage.userId)
-              .then(function(result) {
-                
-                  $scope.grpData = result.data.output;
-                  $scope.hide($ionicLoading);                 
-                
-            }, function(error) {
-                //console.log(error);
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });
-              
+                  });
+    /****************** END FUNCTION ******************/  
     };
-  
-  
-  if($localStorage.hasOwnProperty("accessToken") === false)
-  {
-     $state.go("login");
-  }
-  
-  
-  $scope.show = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>'
-    });
-    };
-
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
-  
-  
-  $scope.gotoGroup = function() {
-    
-    $state.go("tabs.group");
-    
-  };
-  
-  $scope.gotoAddGroup = function() {
-    
-    $state.go("tabs.addgroup");
-    
-  };
-  
-  
-  $scope.grpName ='';
-  
+ 
+ $scope.newGroupName = '';
+ 
   $scope.addGroup = function() {
     
-          /*----- QUIT app if no internet connectivity is found------- */
+        var reg = /[^A-Za-z0-9 ]/;
     
-          $ionicPlatform.ready(function() {
-              if(window.Connection) {
-                          if(navigator.connection.type == Connection.NONE) {
-                              $ionicPopup.alert({
-                                  title: "Internet Disconnected",
-                                  content: "The internet is disconnected on your device."
-                              })
-                              .then(function(result) {
-                                  ionic.Platform.exitApp();
-                              });
-                          }
-                      }
-          });
-    
-          var reg = /[^A-Za-z0-9 ]/;
-    
-          if ($scope.grpName=='') {
+          if ($scope.newGroupName=='') {
             $ionicPopup.alert({
                   title: 'Alert',
                   template: 'Please enter a group name!'
@@ -342,114 +353,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
             return false;
           }
           
-          if (reg.test($scope.grpName)) {
+          if (reg.test($scope.newGroupName)) {
             $ionicPopup.alert({
                   title: 'Alert',
                   template: 'Invalid input!'
                 });
             return false;
           }
-          
-          $scope.show($ionicLoading);
-          $http.get("http://api.keyrelations.in/sharemovie/creategroup/"+$localStorage.userId+"/"+$scope.grpName)
-              .then(function(result) {
-                
-                if (result.data.hasOwnProperty('success')) {
-
-                    $scope.hide($ionicLoading);
-                    var alertPopup = $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Group created successfully'
-                    });
-                    alertPopup.then(function(res) {
-                    $state.go("tabs.group");
-                  });
-                }
-                else
-                {
-                  $scope.hide($ionicLoading);
-                  $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Bad response from server!'
-                  });
-                  return false;
-                }
-                
-            }, function(error) {
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });    
-    };
-
-  
-})
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("tabController", function($scope,$state) {
-  
- $scope.gotoAddGroup = function() {
-    
-    $state.go("tabs.addgroup");
-    
-  };
-  
-  
-})
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("gtabController", function($scope,$state) {
-  
-  $scope.groupId=$state.params.gId;
-  $scope.groupName=$state.params.gName;
-  
-   $scope.gotoGroup = function() {
-    
-    $state.go("tabs.group");
-    
-  };
-  
-  
-})
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("ProfileController", function($ionicPlatform,$localStorage,$scope,$state,$ionicPopup,$http,$ionicLoading) {
-  
-
-  
-  
-})
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("MemberController", function($ionicPlatform,$localStorage,$scope,$state,$ionicPopup,$http,$ionicLoading) {
-
-  
-  $scope.groupId=$state.params.gId;
-  $scope.groupName=$state.params.gName;
-  
-   $scope.show = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>'
-    });
-    };
-    
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
-  
-  $scope.memName ='';
-  
-  $scope.getMemberData = function() {
     
         /*----- QUIT app if no internet connectivity is found------- */
     
@@ -464,189 +374,59 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
                                   ionic.Platform.exitApp();
                               });
                           }
-                      }
-          });
-        
-        $scope.show($ionicLoading);
-          $http.get("http://api.keyrelations.in/sharemovie/getgroupmembers/"+$scope.groupId)
-              .then(function(result) {
-                
-                  $scope.memData = result.data.output;
-                  $scope.hide($ionicLoading);                 
-                
-            }, function(error) {
-                //console.log(error);
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });
-              
-    };
-  
-  
-
-})
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("AddMemberController", function($ionicPlatform,$localStorage,$scope,$state,$ionicPopup,$http,$ionicLoading) {
-  
-$scope.groupId=$state.params.gId;
-  $scope.groupName=$state.params.gName;
-  
-   $scope.show = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>'
-    });
-    };
-    
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
-  
-  $scope.memName ='';
-  
-  
-  $scope.getMemberData = function() {
-    
-             $ionicPlatform.ready(function() {
-              if(window.Connection) {
-                          if(navigator.connection.type == Connection.NONE) {
-                              $ionicPopup.alert({
-                                  title: "Internet Disconnected",
-                                  content: "The internet is disconnected on your device."
-                              })
-                              .then(function(result) {
-                                  ionic.Platform.exitApp();
-                              });
-                          }
-                      }
-          });
-        
-        $scope.show($ionicLoading);
-        
-            $http.get("https://graph.facebook.com/v2.4/me/friends", { params:
-                      { access_token: $localStorage.accessToken,
-                      fields: "name,id,picture",
-                      format: "json" }})
-            
-            .then(function(result) {
-                
-                if (result.data.hasOwnProperty('error'))
-                {
-                if (result.data.error.code==190) {
-                    $location.path("/login");
-                    return false;
-                  }
-                }
-                $scope.memData = result.data.data;
-                $scope.hide($ionicLoading);  
-            }, function(error) {
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'There was a problem getting your profile!'
-                });
-                //console.log(error);
-            });
-        
-    };
-  
-})
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("AddMovieController", function($ionicPlatform,$localStorage,$scope,$state,$ionicPopup,$http,$ionicLoading) {
-
-  
-  $scope.groupId=$state.params.gId;
-  $scope.groupName=$state.params.gName;
-  
-  $scope.limit = 100;
-  
-  $scope.show = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>'
-    });
-    };
-    
-  $scope.expand = function() {
- 
-    };
-
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
-  $scope.hideAdd = true;
-  $scope.hideResult = true;
-  
-  $scope.movName ='';
-  
-  $scope.addMov = function(id) {
-    
-        var confirmPopup = $ionicPopup.confirm({
-     title: 'Share Movie',
-     template: 'Are you sure you want to share this movie to group?'
-      });
-        
-      confirmPopup.then(function(res) {
-        if(res) {
-          //console.log('You are sure');
-          
-          $scope.show($ionicLoading);
-        
-          $http.get("http://api.keyrelations.in/sharemovie/addmovie/"+$localStorage.userId+"/"+document.getElementById("m"+id).value+"/"+document.getElementById("t"+id).value+"/"+document.getElementById("y"+id).value+"/"+document.getElementById("p"+id).value+"/"+$scope.groupId)
-              .then(function(result) {
-                
-                if (!result.data.hasOwnProperty('error')) {
-                  $scope.hide($ionicLoading);
-                    
-                    
-                    var alertPopup = $ionicPopup.alert({
-                    title: 'Alert',
-                    template: result.data.success
-                    });
-                    alertPopup.then(function(res) {
-                    $state.go("gtabs.movie",{gId:$scope.groupId,gName:$scope.groupName});
-                  });
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            $scope.show($ionicLoading);
+                            $http.get("http://api.keyrelations.in/sharemovie/creategroup/"+$localStorage.userId+"/"+$scope.newGroupName)
+                                .then(function(result) {
+                                  
+                                  if (result.data.hasOwnProperty('success')) {
                   
-                }
-                else
-                {
-                  $scope.hide($ionicLoading);
-                  $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Bad response from server!'
+                                      $scope.hide($ionicLoading);
+                                      var alertPopup = $ionicPopup.alert({
+                                      title: 'Alert',
+                                      template: result.data.success
+                                      });
+                                      alertPopup.then(function(res) {
+                                      $state.go("tab.group");
+                                    });
+                                  }
+                                  else
+                                  {
+                                    $scope.hide($ionicLoading);
+                                    $ionicPopup.alert({
+                                      title: 'Alert',
+                                      template: 'Bad response from server!'
+                                    });
+                                    return false;
+                                  }
+                                  
+                              }, function(error) {
+                                  $scope.hide($ionicLoading);
+                                  $ionicPopup.alert({
+                                    title: 'Alert',
+                                    template: 'Unable to reach app server!'
+                                  });
+                                  //console.log(error);
+                                  return false;
+                              });  
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
                   });
-                  return false;
-                }
-                
-            }, function(error) {
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });    
-          
-        } else {
-          //console.log('You are not sure');
-        }
-      });
-        
-        
+    /****************** END FUNCTION ******************/  
     };
-  
-  $scope.searchMov = function() {
     
-          var reg = /[^A-Za-z0-9 ]/;
+    $scope.newMovieName = '';
     
-          if ($scope.movName=='') {
+    $scope.searchMovie = function() {
+    
+       var reg = /[^A-Za-z0-9 ]/;
+    
+          if ($scope.newMovieName=='') {
             $ionicPopup.alert({
                   title: 'Alert',
                   template: 'Please enter a movie name!'
@@ -654,83 +434,13 @@ $scope.groupId=$state.params.gId;
             return false;
           }
           
-          if (reg.test($scope.movName)) {
+          if (reg.test($scope.newMovieName)) {
             $ionicPopup.alert({
                   title: 'Alert',
                   template: 'Invalid input!'
                 });
             return false;
           }
-          
-          $scope.show($ionicLoading);
-          $http.get("http://api.keyrelations.in/sharemovie/getmovielist/"+$scope.movName)
-              .then(function(result) {
-                
-                if (!result.data.hasOwnProperty('error')) {
-                  
-                  //$location.path("/tab/home");
-                  $scope.movieData = result.data.output;
-                  $scope.hideResult = false;
-                  $scope.hide($ionicLoading);
-                  if ($scope.movieData[0]==undefined) {
-                    $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'No matches found.'
-                  });
-                  }
-                }
-                else
-                {
-                  $scope.hide($ionicLoading);
-                  $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Bad response from server!'
-                  });
-                  return false;
-                }
-                
-            }, function(error) {
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });    
-    };
-  
-
-})
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-.controller("MovieController", function($ionicPlatform,$localStorage,$scope,$state,$ionicPopup,$http,$ionicLoading) {
-
- 
-  
-  $scope.groupId=$state.params.gId;
-  $scope.groupName=$state.params.gName;
-  
-  $scope.gotoAddMovie = function() {
-    
-    $state.go("gtabs.addmovie",{gId:$scope.groupId,gName:$scope.groupName});
-    
-  };
-  
-  $scope.movName = '';
-  
-   $scope.show = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>'
-    });
-    };
-    
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
-  
-  $scope.getMovieData = function() {
     
         /*----- QUIT app if no internet connectivity is found------- */
     
@@ -745,29 +455,535 @@ $scope.groupId=$state.params.gId;
                                   ionic.Platform.exitApp();
                               });
                           }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            $scope.show($ionicLoading);
+                            $http.get("http://api.keyrelations.in/sharemovie/searchmovie/"+$localStorage.userId+"/"+$scope.newMovieName)
+                                .then(function(result) {
+                                  
+                                  if (!result.data.hasOwnProperty('error')) {
+                                    
+                                    //$location.path("/tab/home");
+                                    $scope.movieData = result.data.output;
+                                    $scope.hideResult = false;
+                                    $scope.hide($ionicLoading);
+                                    if ($scope.movieData[0]==undefined) {
+                                      $ionicPopup.alert({
+                                      title: 'Alert',
+                                      template: 'No matches found.'
+                                    });
+                                    }
+                                  }
+                                  else
+                                  {
+                                    $scope.hide($ionicLoading);
+                                    $ionicPopup.alert({
+                                      title: 'Alert',
+                                      template: 'Bad response from server!'
+                                    });
+                                    return false;
+                                  }
+                                  
+                              }, function(error) {
+                                  $scope.hide($ionicLoading);
+                                  $ionicPopup.alert({
+                                    title: 'Alert',
+                                    template: 'Unable to reach app server!'
+                                  });
+                                  //console.log(error);
+                                  return false;
+                              }); 
+                          
+                           /****************** END API CALL ******************/                      
+                         }
                       }
-          });
-        
-        $scope.show($ionicLoading);
-          $http.get("http://api.keyrelations.in/sharemovie/getgroupmovies/"+$scope.groupId)
-              .then(function(result) {
-                
-                  $scope.movData = result.data.output;
-                  $scope.hide($ionicLoading);                 
-                
-            }, function(error) {
-                //console.log(error);
-                $scope.hide($ionicLoading);
-                $ionicPopup.alert({
-                  title: 'Alert',
-                  template: 'Unable to reach app server!'
-                });
-                //console.log(error);
-                return false;
-            });
-              
+                  });
+    /****************** END FUNCTION ******************/  
     };
+    
+    $scope.addMovie = function(id) {
   
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            var confirmPopup = $ionicPopup.confirm({
+                            title: 'Share Movie',
+                            template: 'Are you sure you want to share this movie to group?'
+                             });
+                               
+                             confirmPopup.then(function(res) {
+                               if(res) {
+                                 //console.log('You are sure');
+                                 
+                                 $scope.show($ionicLoading);
+                               
+                                 $http.get("http://api.keyrelations.in/sharemovie/addmovie/"+$localStorage.userId+"/"+document.getElementById("m"+id).value+"/"+document.getElementById("t"+id).value+"/"+document.getElementById("y"+id).value+"/"+document.getElementById("p"+id).value+"/"+$scope.groupIdParam)
+                                     .then(function(result) {
+                                       
+                                       if (!result.data.hasOwnProperty('error')) {
+                                         $scope.hide($ionicLoading);
+                                           var alertPopup = $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: result.data.success
+                                           });
+                                           alertPopup.then(function(res) {
+                                           $state.go("gtab.movie",{gId:$scope.groupIdParam,gName:$scope.groupNameParam});
+                                         });
+                                         
+                                       }
+                                       else
+                                       {
+                                         $scope.hide($ionicLoading);
+                                         $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'Bad response from server!'
+                                         });
+                                         return false;
+                                       }
+                                       
+                                   }, function(error) {
+                                       $scope.hide($ionicLoading);
+                                       $ionicPopup.alert({
+                                         title: 'Alert',
+                                         template: 'Unable to reach app server!'
+                                       });
+                                       //console.log(error);
+                                       return false;
+                                   });    
+                                 
+                               } else {
+                                 //console.log('You are not sure');
+                               }
+                             });
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
+    $scope.movieName = '';
+    $scope.recentAddedSortValue = false;
+    $scope.sortParam = 'votes';
+    
+    $scope.sortChange = function() {
+      
+      if ($scope.recentAddedSortValue) {
+        $scope.sortParam = 'timestamp';
+      }
+      else{
+        $scope.sortParam = 'votes';
+      }
+      
+    };
+    
+    $scope.getMovieData = function() {
+    
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            $scope.show($ionicLoading);
+                            $http.get("http://api.keyrelations.in/sharemovie/getgroupmovies/"+$localStorage.userId+"/"+$scope.groupIdParam)
+                                .then(function(result) {
+                                    if (!result.data.hasOwnProperty('error')) {
+                                        $scope.movData = result.data.output;
+                                        $scope.hide($ionicLoading);                 
+                                    }
+                                    else
+                                    {
+                                        $scope.hide($ionicLoading);
+                                         $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'Bad response from server!'
+                                         });
+                                         return false;
+                                    }
+                              }, function(error) {
+                                  //console.log(error);
+                                  $scope.hide($ionicLoading);
+                                  $ionicPopup.alert({
+                                    title: 'Alert',
+                                    template: 'Unable to reach app server!'
+                                  });
+                                  //console.log(error);
+                                  return false;
+                              }); 
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
+    $scope.memberName = '';
+    $scope.getMemberData = function() {
+    
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            $scope.show($ionicLoading);
+                            $http.get("http://api.keyrelations.in/sharemovie/getgroupmembers/"+$localStorage.userId+"/"+$scope.groupIdParam)
+                                .then(function(result) {
+                                    if (!result.data.hasOwnProperty('error')) {
+                                        $scope.memData = result.data.output;
+                                        $scope.hide($ionicLoading);                 
+                                    }
+                                    else
+                                    {
+                                        $scope.hide($ionicLoading);
+                                         $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'Bad response from server!'
+                                         });
+                                         return false;
+                                    }
+                              }, function(error) {
+                                  //console.log(error);
+                                  $scope.hide($ionicLoading);
+                                  $ionicPopup.alert({
+                                    title: 'Alert',
+                                    template: 'Unable to reach app server!'
+                                  });
+                                  //console.log(error);
+                                  return false;
+                              }); 
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
+    $scope.newMemberName = '';
+    $scope.searchMember = function() {
+    
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            $scope.show($ionicLoading);       
+                            $http.get("https://graph.facebook.com/v2.4/me/friends", { params:
+                                      { access_token: $localStorage.accessToken,
+                                      fields: "name,id,picture",
+                                      format: "json" }})
+                            
+                            .then(function(result) {
+                                
+                                if (result.data.hasOwnProperty('error'))
+                                {
+                                if (result.data.error.code==190) {
+                                    $state.go("login");
+                                    return false;
+                                  }
+                                }
+                                $scope.newMemData = result.data.data;
+                                $scope.hide($ionicLoading);  
+                            }, function(error) {
+                                $ionicPopup.alert({
+                                  title: 'Alert',
+                                  template: 'There was a problem getting your profile!'
+                                });
+                                //console.log(error);
+                            });
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
+    $scope.addMember = function(id) {
   
-
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            var confirmPopup = $ionicPopup.confirm({
+                            title: 'Add Member',
+                            template: 'Are you sure you want to add this user to group?'
+                             });
+                               
+                             confirmPopup.then(function(res) {
+                               if(res) {
+                                 //console.log('You are sure');
+                                 
+                                 $scope.show($ionicLoading);
+                               
+                                 $http.get("http://api.keyrelations.in/sharemovie/addmember/"+$localStorage.userId+"/"+id+"/"+$scope.groupIdParam)
+                                     .then(function(result) {
+                                       
+                                       if (!result.data.hasOwnProperty('error')) {
+                                         $scope.hide($ionicLoading);
+                                           var alertPopup = $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: result.data.success
+                                           });
+                                           alertPopup.then(function(res) {
+                                           $state.go("gtab.member",{gId:$scope.groupIdParam,gName:$scope.groupNameParam});
+                                         });
+                                         
+                                       }
+                                       else
+                                       {
+                                         $scope.hide($ionicLoading);
+                                         $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'Bad response from server!'
+                                         });
+                                         return false;
+                                       }
+                                       
+                                   }, function(error) {
+                                       $scope.hide($ionicLoading);
+                                       $ionicPopup.alert({
+                                         title: 'Alert',
+                                         template: 'Unable to reach app server!'
+                                       });
+                                       //console.log(error);
+                                       return false;
+                                   });    
+                                 
+                               } else {
+                                 //console.log('You are not sure');
+                               }
+                             });
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
+    $scope.voteMovie = function(id) {
+  
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            var confirmPopup = $ionicPopup.confirm({
+                            title: 'Vote Movie',
+                            template: 'Are you sure you want to vote for this movie?'
+                             });
+                               
+                             confirmPopup.then(function(res) {
+                               if(res) {
+                                 //console.log('You are sure');
+                                 
+                                 $scope.show($ionicLoading);
+                               
+                                 $http.get("http://api.keyrelations.in/sharemovie/votemovie/"+$localStorage.userId+"/"+id+"/"+$scope.groupIdParam)
+                                     .then(function(result) {
+                                       
+                                       if (!result.data.hasOwnProperty('error')) {
+                                         $scope.hide($ionicLoading);
+                                           var alertPopup = $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: result.data.success
+                                           });
+                                           alertPopup.then(function(res) {
+                                           //$state.go("gtab.movie",{gId:$scope.groupIdParam,gName:$scope.groupNameParam});
+                                           window.location.reload(true);
+                                         });
+                                         
+                                       }
+                                       else
+                                       {
+                                         $scope.hide($ionicLoading);
+                                         $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'Bad response from server!'
+                                         });
+                                         return false;
+                                       }
+                                       
+                                   }, function(error) {
+                                       $scope.hide($ionicLoading);
+                                       $ionicPopup.alert({
+                                         title: 'Alert',
+                                         template: 'Unable to reach app server!'
+                                       });
+                                       //console.log(error);
+                                       return false;
+                                   });    
+                                 
+                               } else {
+                                 //console.log('You are not sure');
+                               }
+                             });
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
+    
+    $scope.exitGroup = function(id) {
+  
+        /*----- QUIT app if no internet connectivity is found------- */
+    
+          $ionicPlatform.ready(function() {
+              if(window.Connection) {
+                          if(navigator.connection.type == Connection.NONE) {
+                              $ionicPopup.alert({
+                                  title: "Internet Disconnected",
+                                  content: "The internet is disconnected on your device."
+                              })
+                              .then(function(result) {
+                                  ionic.Platform.exitApp();
+                              });
+                          }
+                          else {
+                            
+                            /****************** START API CALL ******************/
+                            
+                            var confirmPopup = $ionicPopup.confirm({
+                            title: 'Share Movie',
+                            template: 'Are you sure you want to exit this group?'
+                             });
+                               
+                             confirmPopup.then(function(res) {
+                               if(res) {
+                                 //console.log('You are sure');
+                                 
+                                 $scope.show($ionicLoading);
+                               
+                                 $http.get("http://api.keyrelations.in/sharemovie/exitgroup/"+$localStorage.userId+"/"+id)
+                                     .then(function(result) {
+                                       
+                                       if (!result.data.hasOwnProperty('error')) {
+                                         $scope.hide($ionicLoading);
+                                           var alertPopup = $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'You have exited the group successfully'
+                                           });
+                                           alertPopup.then(function(res) {
+                                           //window.location.reload(true);
+                                            $scope.groupIdParam='';
+                                            $scope.groupNameParam='';
+                                           $state.go("tab.group");
+                                         });
+                                         
+                                       }
+                                       else
+                                       {
+                                         $scope.hide($ionicLoading);
+                                         $ionicPopup.alert({
+                                           title: 'Alert',
+                                           template: 'Bad response from server!'
+                                         });
+                                         return false;
+                                       }
+                                       
+                                   }, function(error) {
+                                       $scope.hide($ionicLoading);
+                                       $ionicPopup.alert({
+                                         title: 'Alert',
+                                         template: 'Unable to reach app server!'
+                                       });
+                                       //console.log(error);
+                                       return false;
+                                   });    
+                                 
+                               } else {
+                                 //console.log('You are not sure');
+                               }
+                             });
+                          
+                           /****************** END API CALL ******************/                      
+                         }
+                      }
+                  });
+    /****************** END FUNCTION ******************/  
+    };
+    
 });
