@@ -36,7 +36,8 @@
       
       <div class="list">
         <a class="item item-avatar" href="#" ng-repeat="item in memData | filter : memberName">
-          <img ng-src="https://graph.facebook.com/v2.5/{{item.id}}/picture?&type=small">
+          <img ng-src="https://graph.facebook.com/v2.5/{{item.id}}/picture?&type=small" imageonload>
+          <span class="image-loader-container-fb loading"><ion-spinner icon="dots"></ion-spinner></span>
           <h2>{{item.name}}</h2>
         </a>
       </div>

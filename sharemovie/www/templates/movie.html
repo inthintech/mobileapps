@@ -41,7 +41,9 @@
         
   <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movData | orderBy : sortParam : true | filter : movieName">
     
-    <img ng-src="http://image.tmdb.org/t/p/w185/{{item.image}}" ng-hide="!item.image" class="ng-hide" >
+    <img ng-src="http://image.tmdb.org/t/p/w185/{{item.image}}"
+         ng-hide="!item.image" class="ng-hide" imageonload>
+    <span class="image-loader-container loading ng-hide" ng-hide="!item.image"><ion-spinner icon="dots"></ion-spinner></span>
     
     <h2>{{item.movie_name}}</h2>
       

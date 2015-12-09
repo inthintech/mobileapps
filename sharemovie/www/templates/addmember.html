@@ -17,8 +17,8 @@
         
   <ion-item class="item item-text-wrap item-avatar item-button-right" ng-repeat="item in newMemData | filter : newMemberName">
     
-    <img ng-src="{{item.picture.data.url}}" >
-    
+    <img ng-src="{{item.picture.data.url}}" imageonload>
+    <span class="image-loader-container-fb loading"><ion-spinner icon="dots"></ion-spinner></span>
     <h2>{{item.name}}</h2>
       
     

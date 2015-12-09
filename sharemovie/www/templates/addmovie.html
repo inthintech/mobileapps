@@ -29,7 +29,9 @@
         
   <ion-item class="item item-text-wrap item-thumbnail-left item-button-right" ng-repeat="item in movieData">
     
-    <img ng-src="http://image.tmdb.org/t/p/w185/{{item.poster_path}}" ng-hide="!item.poster_path" class="ng-hide" >
+    <img ng-src="http://image.tmdb.org/t/p/w185/{{item.poster_path}}"
+         ng-hide="!item.poster_path" class="ng-hide" imageonload>
+    <span class="image-loader-container loading ng-hide" ng-hide="!item.poster_path"><ion-spinner icon="dots"></ion-spinner></span>
     
     <h2 class="padding-left">{{item.title}}</h2>
       
@@ -39,11 +41,11 @@
     <input type="hidden" id="y{{$index}}" value="{{item.release_date | limitTo:4}}"/>
      <input type="hidden" id=p{{$index}} value="{{item.poster_path}}"/>
      <input type="hidden" id=m{{$index}} value="{{item.id}}"/>
-    
+    <!--
     <p class="padding-left" ng-click = "descLimit = item.overview.length;hideTap=true" ng-hide="!item.overview" class="ng-hide">
         {{item.overview | limitTo:descLimit}}<span ng-hide="hideTap" class="ng-hide">...Tap for more</span>
       </p>
-    
+    -->
     <button class="button button-clear" ng-click="addMovie($index)">
       <i class="icon ion-plus-round"></i>
     </button>

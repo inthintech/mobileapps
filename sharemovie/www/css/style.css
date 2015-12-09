@@ -3,10 +3,48 @@
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-	width:50%;
+	width:40%;
 	margin-top: 10%;
 	
 }
 .group-name{
 	margin-top: 10%;
 }
+.image-loader-container
+{
+	position: absolute;
+	top : 10px;
+	left : 10px;
+	max-width: 80px;
+	max-height: 80px;
+	width: 100%;
+	height: 100%;
+}
+.image-loader-container svg
+{
+	position: absolute;
+	top : 30px;
+	left : 30px;
+}
+.image-loader-container-fb
+{
+	position: absolute;
+	top : 10px;
+	left : 10px;
+	max-width: 80px;
+	max-height: 80px;
+	width: 100%;
+	height: 100%;
+}
+.image-loader-container-fb svg
+{
+	position: absolute;
+	top : 10px;
+	left : 10px;
+}
+.spinner-hide .loading{
+              visibility: visible;
+            }
+            .spinner-show .loading{
+              visibility: hidden;
+            }

@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
+angular.module('starter', ['ionic', 'ngCordova', 'ngStorage', 'ionicLazyLoad'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -16,6 +16,26 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
       StatusBar.styleDefault();
     }
   });
+})
+
+.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+      
+        link: function(scope, element) {
+          element.on('load', function() {
+            // Set visibility: true + remove spinner overlay
+              element.removeClass('spinner-hide');
+              element.addClass('spinner-show');
+              element.parent().find('span').remove();
+          });
+          scope.$watch('ngSrc', function() {
+            // Set visibility: false + inject temporary spinner overlay
+              element.addClass('spinner-hide');
+              // element.parent().append('<span class="spinner"></span>');
+          });
+        }
+    };
 })
 
 .config(['$ionicConfigProvider', function($ionicConfigProvider) {
@@ -53,7 +73,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
                 url: '/profile',
                 views: {
                   'profile-tab' : {
-                    templateUrl: 'templates/profile.html'
+                    templateUrl: 'templates/profile.html',
+                    controller: 'GroupController'
                   }
                 }
               })
@@ -246,6 +267,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngStorage'])
    $scope.groupIdParam=$state.params.gId;
    $scope.groupNameParam=$state.params.gName;
     $scope.descLimit = 100;
+   
+   $scope.getUserId = function() {
+      return $localStorage.userId;
+  };
    
    $scope.gotoGroup = function() {
     //$scope.groupIdParam='';
